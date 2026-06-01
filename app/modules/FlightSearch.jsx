@@ -1,3 +1,4 @@
+'use client';
 import {useState} from "react";
 
 const AIRPORTS = ["NZNE", "YSSY", "NZRO", "NZGB", "NZCI", "NZTL"];
