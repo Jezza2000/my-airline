@@ -76,7 +76,7 @@ export default function PassengerSearch() {
     <div>
       <h2>Passenger Lookup</h2>
 
-      <input
+      <input className="emails"
         type="email"
         value={email}
         onChange={e => setEmail(e.target.value)}
@@ -84,7 +84,7 @@ export default function PassengerSearch() {
         placeholder="passenger@example.com"
       />
       <h2>
-        <button onClick={handleSearch} disabled={loading}>
+        <button className="main-buttons" onClick={handleSearch} disabled={loading}>
           {loading ? 'Searching…' : 'Search'}
         </button>
       </h2>
@@ -125,7 +125,7 @@ export default function PassengerSearch() {
                     <td>{formatNZT(f.depDate)}</td>
                     <td>{formatNZT(f.arrDate)}</td>
                     <td>
-                      <button
+                      <button className="main-buttons"
                         onClick={() => handleCancel(f._id)}
                         disabled={cancelling === f._id}
                       >

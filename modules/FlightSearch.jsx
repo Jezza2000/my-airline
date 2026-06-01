@@ -86,7 +86,7 @@ export default function FlightSearch({ onResults }) {
         </div>
       </div>
       {error && <p className="error-msg">{error}</p>}
-      <h2><button className="search-btn" onClick={handleSearch} disabled={loading}>
+      <h2><button className="main-buttons" onClick={handleSearch} disabled={loading}>
         {loading ? 'Searching...' : 'Search Available Flights'}
       </button></h2>
     </div>

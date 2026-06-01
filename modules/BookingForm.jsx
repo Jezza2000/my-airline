@@ -89,12 +89,12 @@ export default function BookingForm({ flight, onSuccess }) {
         </div>
         <div className="field-group" style={{ gridColumn: '1/-1' }}>
           <label>Email address: </label>
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" />
+          <input className="emails" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" />
         </div>
       </div>
       {error && <p className="error-msg">{error}</p>}
       <h2>
-        <button className="confirm-btn" onClick={handleSubmit} disabled={loading}>
+        <button className="main-buttons" onClick={handleSubmit} disabled={loading}>
           {loading ? 'Confirming...' : 'Confirm Booking'}
         </button>
       </h2>

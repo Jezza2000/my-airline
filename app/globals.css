@@ -14,7 +14,34 @@
 
 .main {
     margin: 2%;
+    border-radius: 25px;
+    background: rgba(219, 168, 0, 0.6);
+    padding: 50px;
 }
+
+.inner-content {
+}
+
+.intro {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro-image {
+    flex: 1;
+}
+
+.intro-image img {
+    width: 700px;
+    height: auto;
+    border-radius: 8px;
+}
+
 
 body {
   background: var(--background);
@@ -23,7 +50,7 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 5rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
@@ -39,10 +66,6 @@ ul {
   padding-left: 1.5rem;
 }
 
-.results-panel {
-
-}
-
 .section-label {
     font-size: 24px;
     font-weight: 600;
@@ -55,19 +78,33 @@ ul {
     flex-wrap: wrap;
     gap: 12px;
     width: fit-content;
-    background: white;
     border-radius: 8px;
 }
 
-.selected {
-    border-radius: 25px;
-    background-color: #73AD21;
-    padding: 20px;
+.flight-card {
+    background: white;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
 }
 
-.flight-card {
-    border-radius: 25px;
+.flight-card.selected {
+    background: green;
+    border-color: green;
+    color: white;
+}
+.main-buttons {
+    margin-right: 50px;
+    border-radius: 5px;
     border: 2px solid #73AD21;
-    padding: 20px;
-    min-width: 310px;
+    padding: 5px;
+}
+
+.main-buttons:hover {
+    background-color: #73AD21;
+}
+
+.emails {
+    width: 250px;
 }
