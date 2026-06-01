@@ -47,23 +47,23 @@ export default function FlightSearch () {
       <div className="search-grid">
         <div className="field-group">
           <label>From</label>
-          <select value={from} onChange={e => setOrig(e.target.value)}>
+          <select value={orig} onChange={e => setOrig(e.target.value)}>
             {AIRPORT_OPTIONS.map(a => <option key={a.code} value={a.code}>{a.label}</option>)}
           </select>
         </div>
         <div className="field-group">
           <label>To</label>
-          <select value={to} onChange={e => setDest(e.target.value)}>
+          <select value={dest} onChange={e => setDest(e.target.value)}>
             {AIRPORT_OPTIONS.map(a => <option key={a.code} value={a.code}>{a.label}</option>)}
           </select>
         </div>
         <div className="field-group">
           <label>Departure from</label>
-          <input type="date" value={startDate} onChange={e => setDateFrom(e.target.value)} />
+          <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} />
         </div>
         <div className="field-group">
           <label>Departure to</label>
-          <input type="date" value={endDate} onChange={e => setDateTo(e.target.value)} />
+          <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} />
         </div>
       </div>
       {error && <p className="error-msg">{error}</p>}
