@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import FlightSearch from "./modules/FlightSearch";
+import FlightSearch from "@/modules/FlightSearch";
 
 export default function Home() {
   return (
