@@ -29,7 +29,15 @@ export default function FlightSearch({ onResults }) {
   const [error,    setError]    = useState('');
 
   const destOptions = AIRPORT_OPTIONS.filter(a => ROUTES[orig].includes(a.code));
-  const origOptions = AIRPORT_OPTIONS.filter(a => ROUTES[a.code].includes(dest));
+
+  function handleOrigChange(e) {
+    const newOrig = e.target.value;
+    setOrig(newOrig);
+    // If current dest is no longer valid, reset to first valid option
+    if (!ROUTES[newOrig].includes(dest)) {
+      setDest(ROUTES[newOrig][0]);
+    }
+  }
 
   async function handleSearch() {
     if (orig === dest) { setError('Origin and destination cannot be the same.'); return; }
@@ -55,32 +63,18 @@ export default function FlightSearch({ onResults }) {
       <div className="search-grid">
         <div className="field-group">
           <label>From</label>
-          <select
-            value={orig}
-            onChange={e => {
-              const newOrig = e.target.value;
-              setOrig(newOrig);
-              if (!ROUTES[newOrig].includes(dest)) {
-                setDest(ROUTES[newOrig][0]);
-              }
-            }}
-          >
-            {origOptions.map(a => <option key={a.code} value={a.code}>{a.label}</option>)}
+          <select value={orig} onChange={handleOrigChange}>
+            {AIRPORT_OPTIONS.map(a => (
+              <option key={a.code} value={a.code}>{a.label}</option>
+            ))}
           </select>
         </div>
         <div className="field-group">
           <label>To</label>
-          <select
-            value={dest}
-            onChange={e => {
-              const newDest = e.target.value;
-              setDest(newDest);
-              if (!ROUTES[orig].includes(newDest)) {
-                setOrig(ROUTES_FROM[newDest][0]);
-              }
-            }}
-          >
-            {destOptions.map(a => <option key={a.code} value={a.code}>{a.label}</option>)}
+          <select value={dest} onChange={e => setDest(e.target.value)}>
+            {destOptions.map(a => (
+              <option key={a.code} value={a.code}>{a.label}</option>
+            ))}
           </select>
         </div>
         <div className="field-group">
