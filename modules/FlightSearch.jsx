@@ -10,6 +10,16 @@ const AIRPORT_OPTIONS = [
   { code: 'NZTL', label: 'Lake Tekapo (NZTL)' },
 ];
 
+//restricts which destination shows when selecting origin
+const ROUTES = {
+  NZNE: ['YSSY', 'NZRO', 'NZGB', 'NZCI', 'NZTL'],
+  YSSY: ['NZNE'],
+  NZRO: ['NZNE'],
+  NZGB: ['NZNE'],
+  NZCI: ['NZNE'],
+  NZTL: ['NZNE'],
+};
+
 export default function FlightSearch({ onResults }) {
   const [orig,     setOrig]     = useState('NZNE');
   const [dest,     setDest]     = useState('YSSY');
@@ -17,6 +27,9 @@ export default function FlightSearch({ onResults }) {
   const [dateTo,   setDateTo]   = useState('2026-06-30');
   const [loading,  setLoading]  = useState(false);
   const [error,    setError]    = useState('');
+
+  const destOptions = AIRPORT_OPTIONS.filter(a => ROUTES[orig].includes(a.code));
+  const origOptions = AIRPORT_OPTIONS.filter(a => ROUTES[a.code].includes(dest));
 
   async function handleSearch() {
     if (orig === dest) { setError('Origin and destination cannot be the same.'); return; }
@@ -42,14 +55,32 @@ export default function FlightSearch({ onResults }) {
       <div className="search-grid">
         <div className="field-group">
           <label>From</label>
-          <select value={orig} onChange={e => setOrig(e.target.value)}>
-            {AIRPORT_OPTIONS.map(a => <option key={a.code} value={a.code}>{a.label}</option>)}
+          <select
+            value={orig}
+            onChange={e => {
+              const newOrig = e.target.value;
+              setOrig(newOrig);
+              if (!ROUTES[newOrig].includes(dest)) {
+                setDest(ROUTES[newOrig][0]);
+              }
+            }}
+          >
+            {origOptions.map(a => <option key={a.code} value={a.code}>{a.label}</option>)}
           </select>
         </div>
         <div className="field-group">
           <label>To</label>
-          <select value={dest} onChange={e => setDest(e.target.value)}>
-            {AIRPORT_OPTIONS.map(a => <option key={a.code} value={a.code}>{a.label}</option>)}
+          <select
+            value={dest}
+            onChange={e => {
+              const newDest = e.target.value;
+              setDest(newDest);
+              if (!ROUTES[orig].includes(newDest)) {
+                setOrig(ROUTES_FROM[newDest][0]);
+              }
+            }}
+          >
+            {destOptions.map(a => <option key={a.code} value={a.code}>{a.label}</option>)}
           </select>
         </div>
         <div className="field-group">

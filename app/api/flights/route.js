@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { isValidRoute } from '@/lib/schedules';
 
-// GET /api/flights?orig=NZNE&dest=YSSY&from=2026-06-01&to=2026-06-30
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const orig = searchParams.get('orig');
@@ -41,7 +40,6 @@ export async function GET(request) {
       }
     ).toArray();
 
-    // Compute available seats manually (projection $subtract not supported in all drivers)
     const result = flights.map(f => ({
       ...f,
       _id: f._id.toString(),
