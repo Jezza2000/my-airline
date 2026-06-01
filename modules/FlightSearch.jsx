@@ -1,5 +1,5 @@
 'use client';
-import {useState} from "react";
+import { useState } from 'react';
 
 const AIRPORT_OPTIONS = [
   { code: 'NZNE', label: 'Dairy Flat (NZNE)' },
@@ -10,30 +10,25 @@ const AIRPORT_OPTIONS = [
   { code: 'NZTL', label: 'Lake Tekapo (NZTL)' },
 ];
 
-export default function FlightSearch () {
-  const [orig, setOrig] = useState("NZNE");
-  const [dest, setDest] = useState("YSSY");
+export default function FlightSearch({ onResults }) {
+  const [orig,     setOrig]     = useState('NZNE');
+  const [dest,     setDest]     = useState('YSSY');
   const [dateFrom, setDateFrom] = useState('2026-06-01');
-  const [dateTo, setDateTo] = useState('2026-06-30');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [dateTo,   setDateTo]   = useState('2026-06-30');
+  const [loading,  setLoading]  = useState(false);
+  const [error,    setError]    = useState('');
 
   async function handleSearch() {
-    if (orig === dest) {
-      setError('Origin and destination cannot be the same.');
-      return;
-    }
+    if (orig === dest) { setError('Origin and destination cannot be the same.'); return; }
     setError('');
     setLoading(true);
     try {
       const res = await fetch(
-          `/api/flights?orig=${orig}&dest=${dest}&from=${dateFrom}&to=${dateTo}`
+        `/api/flights?orig=${orig}&dest=${dest}&from=${dateFrom}&to=${dateTo}`
       );
       const data = await res.json();
-      if (!res.ok) {
-        setError(data.error || 'Search failed.');
-        onResults([]);
-      } else onResults(data);
+      if (!res.ok) { setError(data.error || 'Search failed.'); onResults([]); }
+      else onResults(data);
     } catch {
       setError('Network error — please try again.');
     } finally {
@@ -42,7 +37,7 @@ export default function FlightSearch () {
   }
 
   return (
-      <div>
+    <div>
       <div className="section-label">Search Flights</div>
       <div className="search-grid">
         <div className="field-group">
