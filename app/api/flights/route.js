@@ -7,8 +7,8 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const orig = searchParams.get('orig');
     const dest = searchParams.get('dest');
-    const startDate = searchParams.get('from');
-    const endDate   = searchParams.get('to');
+    const from = searchParams.get('from');
+    const to   = searchParams.get('to');
 
     if (!orig || !dest) { //checks for blank
         return NextResponse.json({ error: 'origin and destination are required' }, { status: 400 });
@@ -18,8 +18,8 @@ export async function GET(request) {
         return NextResponse.json({ error: 'Invalid route' }, { status: 400 });
     }
 
-    const firstDate = startDate ? new Date(from + 'T00:00:00Z') : new Date();
-    const lastDate   = endDate   ? new Date(to   + 'T23:59:59Z') : new Date(Date.now() + 90 * 86400000);
+    const fromDate = from ? new Date(from + 'T00:00:00Z') : new Date();
+    const toDate   = to   ? new Date(to   + 'T23:59:59Z') : new Date(Date.now() + 90 * 86400000);
 
     try {
         const client = await clientPromise;
@@ -27,9 +27,9 @@ export async function GET(request) {
 
         const flights = await db.collection('schedules').find(
             {
-                startDate,
-                endDate,
-                depDate: { $gte: firstDate, $lte: lastDate },
+                orig,
+                dest,
+                depDate: { $gte: fromDate, $lte: toDate },
                 $expr: { $lt: [{ $size: '$bookings' }, '$seats'] }, // available only
             },
             {
