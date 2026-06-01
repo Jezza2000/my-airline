@@ -11,15 +11,15 @@ const AIRPORT_OPTIONS = [
 ];
 
 export default function FlightSearch () {
-  const [from, setFrom] = useState("NZNE");
-  const [to, setTo] = useState("YSSY");
-  const [startDate, setStartDate] = useState('2026-06-01');
-  const [endDate, setEndDate] = useState('2026-06-30');
+  const [orig, setOrig] = useState("NZNE");
+  const [dest, setDest] = useState("YSSY");
+  const [dateFrom, setDateFrom] = useState('2026-06-01');
+  const [dateTo, setDateTo] = useState('2026-06-30');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   async function handleSearch() {
-    if (from === to) {
+    if (orig === dest) {
       setError('Origin and destination cannot be the same.');
       return;
     }
@@ -47,23 +47,23 @@ export default function FlightSearch () {
       <div className="search-grid">
         <div className="field-group">
           <label>From</label>
-          <select value={from} onChange={e => setFrom(e.target.value)}>
+          <select value={from} onChange={e => setOrig(e.target.value)}>
             {AIRPORT_OPTIONS.map(a => <option key={a.code} value={a.code}>{a.label}</option>)}
           </select>
         </div>
         <div className="field-group">
           <label>To</label>
-          <select value={to} onChange={e => setTo(e.target.value)}>
+          <select value={to} onChange={e => setDest(e.target.value)}>
             {AIRPORT_OPTIONS.map(a => <option key={a.code} value={a.code}>{a.label}</option>)}
           </select>
         </div>
         <div className="field-group">
           <label>Departure from</label>
-          <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
+          <input type="date" value={startDate} onChange={e => setDateFrom(e.target.value)} />
         </div>
         <div className="field-group">
           <label>Departure to</label>
-          <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
+          <input type="date" value={endDate} onChange={e => setDateTo(e.target.value)} />
         </div>
       </div>
       {error && <p className="error-msg">{error}</p>}
