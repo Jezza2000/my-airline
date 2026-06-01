@@ -38,6 +38,6 @@ export async function GET(request) {
 
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: 'Server error.' }, { status: 500 });
+    return NextResponse.json({ error: 'Passenger not found.' }, { status: 500 });
   }
 }

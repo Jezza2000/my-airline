@@ -59,43 +59,45 @@ export default function BookingForm({ flight, onSuccess }) {
     <div className="booking-panel visible">
       <div className="section-label">Passenger Details</div>
       <div className="flight-summary">
-        <strong>{flight.flightNo}</strong> &nbsp;·&nbsp;
-        {AIRPORTS[flight.orig]} → {AIRPORTS[flight.dest]}<br />
-        Departs: {formatNZT(flight.depDate)} &nbsp;·&nbsp;
+        <strong>{flight.flightNo}</strong> &nbsp;
+        {AIRPORTS[flight.orig]} to {AIRPORTS[flight.dest]}<br />
+        Departs: {formatNZT(flight.depDate)} &nbsp;
         Aircraft: {flight.aircraft}
       </div>
       <div className="booking-grid">
         <div className="field-group">
-          <label>Title</label>
+          <label>Title: </label>
           <select value={title} onChange={e => setTitle(e.target.value)}>
             <option value="" disabled>Select…</option>
             {TITLES.map(t => <option key={t} value={t}>{t}</option>)}
           </select>
         </div>
         <div className="field-group">
-          <label>First name</label>
-          <input type="text" value={firstname} onChange={e => setFirstname(e.target.value)} placeholder="e.g. Aroha" />
+          <label>First name: </label>
+          <input type="text" value={firstname} onChange={e => setFirstname(e.target.value)} placeholder="e.g. John" />
         </div>
         <div className="field-group">
-          <label>Last name</label>
-          <input type="text" value={lastname} onChange={e => setLastname(e.target.value)} placeholder="e.g. Tane" />
+          <label>Last name: </label>
+          <input type="text" value={lastname} onChange={e => setLastname(e.target.value)} placeholder="e.g. Smith" />
         </div>
         <div className="field-group">
-          <label>Gender</label>
+          <label>Gender: </label>
           <select value={gender} onChange={e => setGender(e.target.value)}>
             <option value="" disabled>Select…</option>
             {GENDERS.map(g => <option key={g.value} value={g.value}>{g.label}</option>)}
           </select>
         </div>
         <div className="field-group" style={{ gridColumn: '1/-1' }}>
-          <label>Email address</label>
+          <label>Email address: </label>
           <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" />
         </div>
       </div>
       {error && <p className="error-msg">{error}</p>}
-      <button className="confirm-btn" onClick={handleSubmit} disabled={loading}>
-        {loading ? 'Confirming...' : 'Confirm Booking'}
-      </button>
+      <h2>
+        <button className="confirm-btn" onClick={handleSubmit} disabled={loading}>
+          {loading ? 'Confirming...' : 'Confirm Booking'}
+        </button>
+      </h2>
     </div>
   );
 }

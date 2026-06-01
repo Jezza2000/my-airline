@@ -83,10 +83,11 @@ export default function PassengerSearch() {
         onKeyDown={e => e.key === 'Enter' && handleSearch()}
         placeholder="passenger@example.com"
       />
-      <button onClick={handleSearch} disabled={loading}>
-        {loading ? 'Searching…' : 'Search'}
-      </button>
-
+      <h2>
+        <button onClick={handleSearch} disabled={loading}>
+          {loading ? 'Searching…' : 'Search'}
+        </button>
+      </h2>
       {error && <p>{error}</p>}
 
       {searched && !passenger && <p>No passenger found for <em>{email}</em>.</p>}

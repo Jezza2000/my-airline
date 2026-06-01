@@ -61,7 +61,7 @@ export default function FlightSearch({ onResults }) {
     <div>
       <div className="search-grid">
         <div className="field-group">
-          <label>From</label>
+          <label>From: </label>
           <select value={orig} onChange={handleOrigChange}>
             {AIRPORT_OPTIONS.map(a => (
               <option key={a.code} value={a.code}>{a.label}</option>
@@ -69,7 +69,7 @@ export default function FlightSearch({ onResults }) {
           </select>
         </div>
         <div className="field-group">
-          <label>To</label>
+          <label>To: </label>
           <select value={dest} onChange={e => setDest(e.target.value)}>
             {destOptions.map(a => (
               <option key={a.code} value={a.code}>{a.label}</option>
@@ -77,18 +77,18 @@ export default function FlightSearch({ onResults }) {
           </select>
         </div>
         <div className="field-group">
-          <label>Departure from</label>
+          <label>Departure from: </label>
           <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} />
         </div>
         <div className="field-group">
-          <label>Departure to</label>
+          <label>Departure to: </label>
           <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} />
         </div>
       </div>
       {error && <p className="error-msg">{error}</p>}
-      <button className="search-btn" onClick={handleSearch} disabled={loading}>
+      <h2><button className="search-btn" onClick={handleSearch} disabled={loading}>
         {loading ? 'Searching...' : 'Search Available Flights'}
-      </button>
+      </button></h2>
     </div>
   );
 }
