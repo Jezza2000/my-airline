@@ -21,7 +21,7 @@ export default function Home() {
           </div>
           <div className="search">
               <h1>Search Flights</h1>
-              <AirportSelector />
+              <FlightSearch />
           </div>
       </div>
   );
