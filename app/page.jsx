@@ -4,10 +4,10 @@ export default function Home() {
   return (
     <div>
         <h1>Jeremy Airlines</h1>
-        <p>
+        <h2>
             A new luxury airline operating out of North Shore airport in Dairy flat north of Auckland<br/>
-            We operate the following routes:<br/>
-        </p>
+            We operate the following routes:
+        </h2>
         <ul>
             <li>Weekend service from Dairy Flat to Sydney</li>
             <li>Twice weekday service to Rotorua</li>
