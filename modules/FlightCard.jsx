@@ -19,8 +19,7 @@ export default function FlightCard({ flight, selected, onSelect }) {
       onClick={() => onSelect(flight)}
     >
       <div>
-        <div className="flight-no">{flight.flightNo}</div>
-        <div className="flight-iata">{flight.orig} to {flight.dest}</div>
+        <div className="flight-iata">{flight.flightNo}: {flight.orig} to {flight.dest}</div>
         <div className="flight-time">Departure: {formatNZT(flight.depDate)}</div>
         <div className="flight-time">Arrival: {formatNZT(flight.arrDate)}</div>
       </div>

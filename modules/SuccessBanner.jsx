@@ -14,10 +14,10 @@ function formatNZT(dateStr) {
 export default function SuccessBanner({ booking }) {
   return (
     <div className="success-banner visible">
-      <div className="success-title">✦ Booking Confirmed</div>
+      <h2 className="success-title">Booking Confirmed</h2>
       <div className="success-detail">
         Booking confirmed for <strong>{booking.firstname} {booking.lastname}</strong><br />
-        {AIRPORTS[booking.orig]} → {AIRPORTS[booking.dest]} &nbsp;·&nbsp; {booking.flightNo}<br />
+        {AIRPORTS[booking.orig]} to {AIRPORTS[booking.dest]} &nbsp;·&nbsp; {booking.flightNo}<br />
         {formatNZT(booking.depDate)}<br />
         <span className="success-ref">{booking.reference}</span>
       </div>

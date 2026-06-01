@@ -4,10 +4,10 @@ import clientPromise from '@/lib/mongodb';
 
 export async function POST(request) {
   const body = await request.json();
-  const { flightId, firstname, lastname, email } = body;
+  const { flightId, title, firstname, lastname, gender, email } = body;
 
-  if (!flightId || !firstname || !lastname || !email) {
-    return NextResponse.json({ error: 'flightId, firstname, lastname and email are required' }, { status: 400 });
+  if (!title || !flightId || !firstname || !lastname || !gender || !email) {
+    return NextResponse.json({ error: 'flightId, title, firstname, lastname, gender and email are required' }, { status: 400 });
   }
 
   if (!email.includes('@')) {
@@ -30,8 +30,8 @@ export async function POST(request) {
     let passenger = await passengersCol.findOne({ email });
 
     if (!passenger) {
-      const inserted = await passengersCol.insertOne({ firstname, lastname, email });
-      passenger = { _id: inserted.insertedId, firstname, lastname, email };
+      const inserted = await passengersCol.insertOne({ title, firstname, lastname, gender, email });
+      passenger = { _id: inserted.insertedId, title, firstname, lastname, gender, email };
     }
 
     // add passenger to flight

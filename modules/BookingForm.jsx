@@ -6,6 +6,13 @@ const AIRPORTS = {
   NZGB: 'Great Barrier Island', NZCI: 'Chatham Islands', NZTL: 'Lake Tekapo',
 };
 
+const TITLES = ['Mr', 'Ms', 'Mrs', 'Miss', 'Sir', 'Dame', 'Doctor'];
+
+const GENDERS = [
+  { label: 'Male',   value: 'm' },
+  { label: 'Female', value: 'f' },
+];
+
 function formatNZT(dateStr) {
   return new Date(dateStr).toLocaleString('en-NZ', {
     timeZone: 'Pacific/Auckland',
@@ -14,28 +21,32 @@ function formatNZT(dateStr) {
   });
 }
 
+
+
 export default function BookingForm({ flight, onSuccess }) {
+  const [title,     setTitle]     = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname,  setLastname]  = useState('');
+  const [gender,    setGender]    = useState('');
   const [email,     setEmail]     = useState('');
   const [loading,   setLoading]   = useState(false);
   const [error,     setError]     = useState('');
 
   async function handleSubmit() {
-    if (!firstname || !lastname || !email) { setError('All fields are required.'); return; }
+    if (!title || !firstname || !lastname || !gender || !email) { setError('All fields are required.'); return; }
     setError('');
     setLoading(true);
     try {
       const res = await fetch('/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ flightId: flight._id, firstname, lastname, email }),
+        body: JSON.stringify({ flightId: flight._id, title, firstname, lastname, gender, email }),
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error || 'Booking failed.'); }
       else {
-        onSuccess({ ...data, firstname, lastname });
-        setFirstname(''); setLastname(''); setEmail('');
+        onSuccess({ ...data, title, firstname, lastname });
+        setTitle(''); setFirstname(''); setLastname(''); setGender(''); setEmail('');
       }
     } catch {
       setError('Network error — please try again.');
@@ -55,12 +66,26 @@ export default function BookingForm({ flight, onSuccess }) {
       </div>
       <div className="booking-grid">
         <div className="field-group">
+          <label>Title</label>
+          <select value={title} onChange={e => setTitle(e.target.value)}>
+            <option value="" disabled>Select…</option>
+            {TITLES.map(t => <option key={t} value={t}>{t}</option>)}
+          </select>
+        </div>
+        <div className="field-group">
           <label>First name</label>
           <input type="text" value={firstname} onChange={e => setFirstname(e.target.value)} placeholder="e.g. Aroha" />
         </div>
         <div className="field-group">
           <label>Last name</label>
           <input type="text" value={lastname} onChange={e => setLastname(e.target.value)} placeholder="e.g. Tane" />
+        </div>
+        <div className="field-group">
+          <label>Gender</label>
+          <select value={gender} onChange={e => setGender(e.target.value)}>
+            <option value="" disabled>Select…</option>
+            {GENDERS.map(g => <option key={g.value} value={g.value}>{g.label}</option>)}
+          </select>
         </div>
         <div className="field-group" style={{ gridColumn: '1/-1' }}>
           <label>Email address</label>

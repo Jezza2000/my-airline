@@ -12,6 +12,10 @@
   }
 }
 
+.main {
+    margin: 2%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -35,12 +39,35 @@ ul {
   padding-left: 1.5rem;
 }
 
-
 .results-panel {
-    display: block;
+
+}
+
+.section-label {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.results-listings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     width: fit-content;
-    margin-left: auto;
-    padding: 15px;
     background: white;
     border-radius: 8px;
+}
+
+.selected {
+    border-radius: 25px;
+    background-color: #73AD21;
+    padding: 20px;
+}
+
+.flight-card {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px;
+    min-width: 310px;
 }

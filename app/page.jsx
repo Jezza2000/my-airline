@@ -4,6 +4,7 @@ import FlightSearch from "@/modules/FlightSearch";
 import FlightCard from "@/modules/FlightCard";
 import BookingForm from "@/modules/BookingForm";
 import SuccessBanner from "@/modules/SuccessBanner";
+import PassengerSearch from '@/modules/PassengerSearch';
 
 export default function Home() {
 
@@ -56,9 +57,10 @@ export default function Home() {
 
                   {flights.length > 0 && (
                       <div className="results-panel visible">
-                          <div className="section-label" style={{ marginTop: '1.25rem' }}>
+                          <div className="section-label">
                               Available Flights
                           </div>
+                          <div className="results-listings">
                           {flights.map(f => (
                               <FlightCard
                                   key={f._id}
@@ -67,6 +69,7 @@ export default function Home() {
                                   onSelect={handleSelect}
                               />
                           ))}
+                          </div>
                       </div>
                   )}
                   {selectedFlight && (
@@ -74,6 +77,7 @@ export default function Home() {
                   )}
                   {booking && <SuccessBanner booking={booking} />}
               </div>
+              <PassengerSearch />
           </div>
       );
 }
