@@ -5,16 +5,16 @@ import { isValidRoute } from '@/lib/schedules';
 
 export async function GET(request) {
     const { searchParams } = new URL(request.url);
-    const from = searchParams.get('orig');
-    const to = searchParams.get('dest');
+    const orig = searchParams.get('orig');
+    const dest = searchParams.get('dest');
     const startDate = searchParams.get('from');
     const endDate   = searchParams.get('to');
 
-    if (!from || !to) { //checks for blank
+    if (!orig || !dest) { //checks for blank
         return NextResponse.json({ error: 'origin and destination are required' }, { status: 400 });
     }
 
-    if (!isValidRoute(from, to)) { //checks against the valid route table
+    if (!isValidRoute(orig, dest)) { //checks against the valid route table
         return NextResponse.json({ error: 'Invalid route' }, { status: 400 });
     }
 
