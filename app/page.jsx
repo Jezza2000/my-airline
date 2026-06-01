@@ -72,6 +72,7 @@ export default function Home() {
                         {flights.length > 0 && (
                             <div className="results-panel visible">
                                 <div className="section-label">Available Flights</div>
+                                <div className="timezone">All times displayed in local time</div>
                                 <div className="results-listings">
                                     {flights.map(f => (
                                         <FlightCard

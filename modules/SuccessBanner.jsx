@@ -17,9 +17,8 @@ export default function SuccessBanner({ booking }) {
       <h2 className="success-title">Booking Confirmed</h2>
       <div className="success-detail">
         Booking confirmed for <strong>{booking.firstname} {booking.lastname}</strong><br />
-        {AIRPORTS[booking.orig]} to {AIRPORTS[booking.dest]} &nbsp;·&nbsp; {booking.flightNo}<br />
+        {AIRPORTS[booking.orig]} to {AIRPORTS[booking.dest]} {booking.flightNo}<br />
         {formatNZT(booking.depDate)}<br />
-        <span className="success-ref">{booking.reference}</span>
       </div>
     </div>
   );

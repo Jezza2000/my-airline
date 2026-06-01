@@ -29,12 +29,19 @@ export async function GET(request) {
         orig,
         dest,
         depDate: { $gte: fromDate, $lte: toDate },
-        $expr: { $lt: [{ $size: '$bookings' }, '$seats'] }, // available only
+        $expr: { $lt: [{ $size: '$bookings' }, '$seats'] },
       },
       {
-        projection: { flightNo: 1, aircraft: 1, orig: 1, dest: 1,
-                      depDate: 1, arrDate: 1, seats: 1,
-                      available: { $subtract: ['$seats', { $size: '$bookings' }] } },
+        projection: {
+          flightNo: 1,
+          aircraft: 1,
+          orig: 1,
+          dest: 1,
+          depDate: 1,
+          arrDate: 1,
+          seats: 1,
+          bookings: 1,
+        },
         sort: { depDate: 1 },
         limit: 20,
       }
@@ -42,12 +49,13 @@ export async function GET(request) {
 
     const result = flights.map(f => ({
       ...f,
-      _id: f._id.toString(),
+      _id:      f._id.toString(),
       available: f.seats - (f.bookings?.length ?? 0),
-      bookings: undefined, // never send booking IDs to client
+      bookings: undefined,
     }));
 
     return NextResponse.json(result);
+
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: 'Database error' }, { status: 500 });

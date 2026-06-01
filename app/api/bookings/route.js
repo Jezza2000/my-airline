@@ -36,7 +36,7 @@ export async function POST(request) {
 
     // add passenger to flight
     const result = await db.collection('schedules').findOneAndUpdate(
-      {
+        {
         _id: scheduleId,
         $expr: { $lt: [{ $size: '$bookings' }, '$seats'] },
         bookings: { $ne: passenger._id }, // prevent duplicate booking
@@ -47,17 +47,15 @@ export async function POST(request) {
 
     if (!result) {
       return NextResponse.json(
-        { error: 'Flight is full or booking already exists' },
-        { status: 409 }
+          { error: 'Flight is full or booking already exists' },
+          { status: 409 }
       );
     }
 
     //display reference WIP
-    const ref = 'JH' + Math.random().toString(36).substring(2, 8).toUpperCase();
 
     return NextResponse.json({
       success: true,
-      reference: ref,
       passengerId: passenger._id.toString(),
       flightNo: result.flightNo,
       orig: result.orig,

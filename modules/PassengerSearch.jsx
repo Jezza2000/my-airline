@@ -77,11 +77,11 @@ export default function PassengerSearch() {
       <h2>Passenger Lookup</h2>
 
       <input className="emails"
-        type="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        onKeyDown={e => e.key === 'Enter' && handleSearch()}
-        placeholder="passenger@example.com"
+             type="email"
+             value={email}
+             onChange={e => setEmail(e.target.value)}
+             onKeyDown={e => e.key === 'Enter' && handleSearch()}
+             placeholder="passenger@example.com"
       />
       <h2>
         <button className="main-buttons" onClick={handleSearch} disabled={loading}>
@@ -93,51 +93,50 @@ export default function PassengerSearch() {
       {searched && !passenger && <p>No passenger found for <em>{email}</em>.</p>}
 
       {passenger && (
-        <>
-          <p>
-            <strong>{passenger.title} {passenger.firstname} {passenger.lastname}</strong>
-            &nbsp;·&nbsp;{passenger.gender === 'm' ? 'Male' : 'Female'}
-            &nbsp;·&nbsp;{passenger.email}
-          </p>
-
-          {bookings.length === 0 ? (
-            <p>No current bookings.</p>
-          ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th>Flight</th>
-                  <th>Aircraft</th>
-                  <th>From</th>
-                  <th>To</th>
-                  <th>Departure</th>
-                  <th>Arrival</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {bookings.map(f => (
-                  <tr key={f._id}>
-                    <td>{f.flightNo}</td>
-                    <td>{f.aircraft}</td>
-                    <td>{AIRPORTS[f.orig] ?? f.orig}</td>
-                    <td>{AIRPORTS[f.dest] ?? f.dest}</td>
-                    <td>{formatNZT(f.depDate)}</td>
-                    <td>{formatNZT(f.arrDate)}</td>
-                    <td>
-                      <button className="main-buttons"
-                        onClick={() => handleCancel(f._id)}
-                        disabled={cancelling === f._id}
-                      >
-                        {cancelling === f._id ? 'Cancelling…' : 'Cancel'}
-                      </button>
-                    </td>
+          <>
+            <p>
+              <strong>{passenger.title} {passenger.firstname} {passenger.lastname}</strong>
+              &nbsp;{passenger.gender === 'm' ? 'Male' : 'Female'}
+              &nbsp;{passenger.email}
+            </p>
+            {bookings.length === 0 ? (
+                <p>No current bookings.</p>
+            ) : (
+                <table>
+                  <thead>
+                  <tr>
+                    <th>Flight</th>
+                    <th>Aircraft</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Departure</th>
+                    <th>Arrival</th>
+                    <th></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </>
+                  </thead>
+                  <tbody>
+                  {bookings.map(f => (
+                      <tr key={f._id}>
+                        <td>{f.flightNo}</td>
+                        <td>{f.aircraft}</td>
+                        <td>{AIRPORTS[f.orig] ?? f.orig}</td>
+                        <td>{AIRPORTS[f.dest] ?? f.dest}</td>
+                        <td>{formatNZT(f.depDate)}</td>
+                        <td>{formatNZT(f.arrDate)}</td>
+                        <td>
+                          <button className="main-buttons"
+                                  onClick={() => handleCancel(f._id)}
+                                  disabled={cancelling === f._id}
+                          >
+                            {cancelling === f._id ? 'Cancelling…' : 'Cancel'}
+                          </button>
+                        </td>
+                      </tr>
+                  ))}
+                  </tbody>
+                </table>
+            )}
+          </>
       )}
     </div>
   );

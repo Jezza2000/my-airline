@@ -33,7 +33,6 @@ export default function FlightSearch({ onResults }) {
   function handleOrigChange(e) {
     const newOrig = e.target.value;
     setOrig(newOrig);
-    // If current dest is no longer valid, reset to first valid option
     if (!ROUTES[newOrig].includes(dest)) {
       setDest(ROUTES[newOrig][0]);
     }

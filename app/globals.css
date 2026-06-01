@@ -107,4 +107,34 @@ ul {
 
 .emails {
     width: 250px;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.6rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    white-space: nowrap;
+}
+
+th {
+    font-weight: bold;
+    border-bottom: 2px solid #999;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.success-banner {
+    margin-top: 15px;
+}
+
+.timezone {
+    margin-bottom: 10px;
 }
