@@ -59,7 +59,6 @@ export default function FlightSearch({ onResults }) {
 
   return (
     <div>
-      <div className="section-label">Search Flights</div>
       <div className="search-grid">
         <div className="field-group">
           <label>From</label>
